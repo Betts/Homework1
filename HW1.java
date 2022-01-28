@@ -5,10 +5,22 @@ import java.lang.Math;
 
 
 public class HW1{
+    AtomicInteger counter = new AtomicInteger(1);
+    
     public static void main(String[] args) {
-        long i = 0;
-        long limit = (long) Math.pow(10, 8);
+        int i = 0;
+        // Limit is 10^8, and it is the maximum value that our boss has requested
+        int limit = 100000000;
         // test
+
+        while (i < limit)
+        {
+            i = counter.getAndIncrement();
+            if (isPrime(i))
+            {
+                System.out.println(i);
+            }
+        }
 
 
 
