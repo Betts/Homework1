@@ -2,6 +2,7 @@ import java.util.*;
 import java.util.concurrent.atomic.*;
 import java.io.*;
 import java.lang.Math;
+import java.time.*;
 
 
 
@@ -13,15 +14,20 @@ public class HW1{
         // Limit is 10^8, and it is the maximum value that our boss has requested
         int limit = 100000000;
         // test
-
+        int[] primes = new int[limit + 1];
+    
+        long start = System.currentTimeMillis();
         while (i < limit)
         {
             i = counter.getAndIncrement();
             if (isPrime(i))
             {
+
                 System.out.println(i);
             }
         }
+        long end = System.currentTimeMillis();
+
 
 
 
