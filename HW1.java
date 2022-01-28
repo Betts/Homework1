@@ -1,11 +1,12 @@
 import java.util.*;
+import java.util.concurrent.atomic.*;
 import java.io.*;
 import java.lang.Math;
 
 
 
 public class HW1{
-    AtomicInteger counter = new AtomicInteger(1);
+    static AtomicInteger counter = new AtomicInteger(1);
     
     public static void main(String[] args) {
         int i = 0;
@@ -41,7 +42,7 @@ public class HW1{
             {
                 return false;
             }
-            return true;
         }
+        return true;
     }
 }
