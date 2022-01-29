@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.*;
 import java.util.stream.Collectors;
 import java.io.*;
@@ -9,41 +10,50 @@ import java.time.*;
 
 public class HW1{
     static AtomicInteger counter = new AtomicInteger(1);
-    
-    public static void main(String[] args) throws IOException {
-        int i = 0;
+    static long sum = 0;
+    static AtomicInteger totalPrimes = new AtomicInteger(0);
+
+    public static void main(String[] args) throws FileNotFoundException {
         // Limit is 10^8, and it is the maximum value that our boss has requested
         int limit = 100000000;
-
         List<Integer> lst = new ArrayList<>();
-    
-        long sum = 0;
-        int totalPrimes = 0;
-    
-        long start = System.currentTimeMillis();
 
-        while (i < limit)
+        // We'll be utilizing ExecutorService and an 8 thread pool
+        ExecutorService executor = Executors.newFixedThreadPool(8);
+        executor.execute(() -> {
+            long start = System.currentTimeMillis();
+            int i = 0;
+
+            // Will run through 1 to the set limit, and test each number to see if it is a prime
+            while (i < limit)
         {
             i = counter.getAndIncrement();
             if (isPrime(i))
             {
                 lst.add(i);
                 sum = sum + i;
-                totalPrimes = totalPrimes + 1;
+                totalPrimes.getAndIncrement();
             }
         }
-        long end = System.currentTimeMillis();
+
         List<Integer> lst1 = lst.stream().sorted(Comparator.reverseOrder()).limit(10).collect(Collectors.toList()); 
         Collections.reverse(lst1);
+        long end = System.currentTimeMillis();
         long totalTime = end - start;
-        
-        File file = new File("primes.txt");
-        PrintStream stream = new PrintStream(file);
-        System.setOut(stream);
-        System.out.println("Total Time: " + totalTime +" ms.");
-        System.out.println("Total Primes Found: " + totalPrimes);
-        System.out.println("Sum of Primes: " + sum);
-        System.out.println("Top 10 primes: " + lst1);
+        System.out.println("complete");
+        try (PrintStream o = new PrintStream(new File("primes.txt"))) {
+            PrintStream console = System.out;
+            System.setOut(o);
+            System.out.println("Total Time: " + totalTime +" ms.");
+            System.out.println("Total Primes Found: " + totalPrimes);
+            System.out.println("Sum of Primes: " + sum);
+            System.out.println("Top 10 primes: " + lst1);
+            System.setOut(console);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        });
+        executor.shutdown();
     }
 
     // Method to check whether the incoming number is a prime or not. 
