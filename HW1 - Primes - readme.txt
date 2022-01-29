@@ -38,6 +38,10 @@ Total Number of Primes Found:
 Sum of All Primes Found:
 Top 10 Primes: [smallest - largest]
 
+
+Correct Output can be verified with following information:
+
+According to this ( https://primes.utm.edu/howmany.html ) resource on prime numbers from the University of Tenessee, the total number of prime values between 1 and 10000000 should be 5761455. In our testing, this is the number of primes that we have output. Adjusting the value of limit results in the correct number of prime values being found. This can be verified by running the program on your machine, and comparing the "Total Number of Primes Found" value agains the expected number of primes for the given range. 
  
 
 
