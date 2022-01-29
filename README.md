@@ -34,7 +34,7 @@ To run the program after compiling, enter the following command:
 
 java HW1
 
-This program will run for several minutes, approximately 4 minutes in our testing on my machine, and 
+This program will run for several minutes, approximately 4 minutes in testing on my machine, and 
 output to a newly created file called "primes.txt", which should appear in the same directory as 
 HW1.java. This output will be in the following format:
 
