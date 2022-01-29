@@ -11,8 +11,8 @@ program by changing the "limit" variable.
 How we guarantee it will work with multithreading
 
 This program is based on a loop that runs through our desired range of numbers. This is accomplished 
-by use of a shared Atomic variable, and the atomic operation "getAndIncrement()". This use of atomic 
-variables and operations ensures that the shared variable will never be updated by more than one 
+by use of the executor service with a threadpool of size 8, a shared Atomic variable, and the atomic operation "getAndIncrement()". 
+This use of atomic variables and operations ensures that the shared variable will never be updated by more than one 
 thread at a time. We have formed a sort of queue, where each resource (thread) in our machine must 
 wait in line to grab the next number it that it will check. This also ensures that each thread is doing as 
 close to an equal amount of work as possible. If a thread quickly moves through its current number, 
