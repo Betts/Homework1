@@ -24,9 +24,14 @@ How to use it
 
 Download either this entire directory, or the file HW1.java on its own. Then, in your command line 
 navigate to the location where you have saved this file. 
+
 Enter the following command to compile the program:
+
 javac HW1.java
+
+
 To run the program after compiling, enter the following command:
+
 java HW1
 
 This program will run for several minutes, approximately 4 minutes in our testing on my machine, and 
@@ -34,6 +39,9 @@ output to a newly created file called "primes.txt", which should appear in the s
 HW1.java. This output will be in the following format:
 
 Total Time: (in milliseconds)
+
 Total Number of Primes Found: 
+
 Sum of All Primes Found:
+
 Top 10 Primes: [smallest - largest]
